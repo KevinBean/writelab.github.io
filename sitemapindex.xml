@@ -6,15 +6,15 @@
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <sitemap>
-  <loc>http://writelab.github.io/galleries/rss.xml</loc>
-  <lastmod>2017-07-15T11:16:00Z</lastmod>
+  <loc>http://lab.writelab.cn/galleries/rss.xml</loc>
+  <lastmod>2017-07-15T12:23:00Z</lastmod>
  </sitemap>
  <sitemap>
-  <loc>http://writelab.github.io/rss.xml</loc>
-  <lastmod>2017-07-15T11:16:00Z</lastmod>
+  <loc>http://lab.writelab.cn/rss.xml</loc>
+  <lastmod>2017-07-15T12:23:00Z</lastmod>
  </sitemap>
  <sitemap>
-  <loc>http://writelab.github.io/sitemap.xml</loc>
-  <lastmod>2017-07-15T11:16:00Z</lastmod>
+  <loc>http://lab.writelab.cn/sitemap.xml</loc>
+  <lastmod>2017-07-15T12:23:00Z</lastmod>
  </sitemap>
 </sitemapindex>

@@ -1,4 +1,4 @@
-Sitemap: http://writelab.github.io/sitemapindex.xml
+Sitemap: http://lab.writelab.cn/sitemapindex.xml
 
 User-Agent: *
-Host: writelab.github.io
+Host: lab.writelab.cn
