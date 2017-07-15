@@ -1,4 +1,0 @@
-Sitemap: http://lab.writelab.cn/sitemapindex.xml
-
-User-Agent: *
-Host: lab.writelab.cn

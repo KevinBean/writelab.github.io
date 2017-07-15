@@ -1,9 +1,263 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>writelab</title><link>http://lab.writelab.cn/</link><description>RUN YOU CLEVER BOY</description><atom:link href="http://lab.writelab.cn/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>zh_cn</language><copyright>Contents © 2017 &lt;a href="mailto:bianbin+writelab@gmail.com"&gt;bean&lt;/a&gt; </copyright><lastBuildDate>Sat, 15 Jul 2017 12:23:29 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>test</title><link>http://lab.writelab.cn/posts/test/</link><dc:creator>bean</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>writelab</title><link>http://git.writelab.cn/writelab.github.io/</link><description>RUN YOU CLEVER BOY</description><atom:link href="http://git.writelab.cn/writelab.github.io/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>zh_cn</language><copyright>Contents © 2017 &lt;a href="mailto:bianbin+writelab@gmail.com"&gt;bean&lt;/a&gt; </copyright><lastBuildDate>Sat, 15 Jul 2017 14:04:18 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>github-pages-with-nikola-and-orgmode</title><link>http://git.writelab.cn/writelab.github.io/posts/github-pages-with-nikola-and-orgmode/</link><dc:creator>bean</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h2 id="sec-1"&gt;借助nikola和orgmode完成文章写作和发布流程&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;/div&gt;&lt;div id="outline-container-sec-1-1" class="outline-3"&gt;
+&lt;h3 id="sec-1-1"&gt;博客发布流程 orgmode写作-&amp;gt;nikola管理部署-&amp;gt;github pages呈现&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-1-1"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-1-1-1" class="outline-4"&gt;
+&lt;h4 id="sec-1-1-1"&gt;想法来源&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-1-1-1"&gt;
+&lt;/div&gt;&lt;ul class="org-ul"&gt;&lt;li&gt;&lt;a id="sec-1-1-1-1" name="sec-1-1-1-1"&gt;&lt;/a&gt;&lt;span class="done DONE"&gt;DONE&lt;/span&gt; 根据Mike Zamansky的emacs使用系列文章/视频中的&lt;a href="https://www.youtube.com/watch?v=wSeTic9obKw"&gt;(2) Using Emacs 35 - blogging - YouTube&lt;/a&gt;提到的blog发布流程&lt;br&gt;&lt;div class="outline-text-5" id="text-1-1-1-1"&gt;
+&lt;p&gt;
+区别在于,视频中的发布流程除了orgmode\nikola\github pages之外还利用了prodigy[在emacs中启动外部应用程序/命令行程序],在我的实际应用中还未实现.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-1-2" name="sec-1-1-1-2"&gt;&lt;/a&gt;上述流程实现过程中,在emacs的orgmode中做了相关记录,这篇文章由此记录整理而来.&lt;br&gt;&lt;/li&gt;&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-1-1-2" class="outline-4"&gt;
+&lt;h4 id="sec-1-1-2"&gt;未实现的prodigy&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-1-1-2"&gt;
+&lt;/div&gt;&lt;ul class="org-ul"&gt;&lt;li&gt;&lt;a id="sec-1-1-2-1" name="sec-1-1-2-1"&gt;&lt;/a&gt;prodigy作用为实现在emacs界面中管理外部命令行&lt;br&gt;&lt;div class="outline-text-5" id="text-1-1-2-1"&gt;
+&lt;p&gt;
+prodigy的作者每天要重复进入不同的工作目录,用不同的命令做不同的操作,因此想到用emacs做一个allinone的管理界面,已节约重复性工作.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-2-2" name="sec-1-1-2-2"&gt;&lt;/a&gt;&lt;span class="done DONE"&gt;DONE&lt;/span&gt; 在emacs里使用M-x,package-install即可顺利安装prodigy,可以在emacs里管理外部程序&lt;br&gt;&lt;div class="outline-text-5" id="text-1-1-2-2"&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-2-3" name="sec-1-1-2-3"&gt;&lt;/a&gt;prodigy使用[prodigy-define-service]进行配置&lt;br&gt;&lt;div class="outline-text-5" id="text-1-1-2-3"&gt;
+&lt;p&gt;
+Services are created using prodigy-define-service:
+形式如下:
+&lt;/p&gt;
+&lt;pre class="example"&gt;
+(prodigy-define-service
+  :name "Project X 项目名称"
+  :cwd "~/Code/project 工作目录"
+  :command "nodemon 命令名"
+  :args '("app.coffee 参数")
+  :tags '(work test 标签)
+  :port 9001 端口)
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-2-4" name="sec-1-1-2-4"&gt;&lt;/a&gt;详情请见prodigy项目页面&lt;br&gt;&lt;div class="outline-text-5" id="text-1-1-2-4"&gt;
+&lt;p&gt;
+&lt;a href="https://github.com/rejeep/prodigy.el"&gt;https://github.com/rejeep/prodigy.el&lt;/a&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-1-1-3" class="outline-4"&gt;
+&lt;h4 id="sec-1-1-3"&gt;orgmode的使用&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-1-1-3"&gt;
+&lt;p&gt;
+orgmode的使用和有点可手动搜索,此处略
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-1-1-4" class="outline-4"&gt;
+&lt;h4 id="sec-1-1-4"&gt;nikola作为文章管理及静态站点生成器&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-1-1-4"&gt;
+&lt;/div&gt;&lt;ul class="org-ul"&gt;&lt;li&gt;&lt;a id="sec-1-1-4-1" name="sec-1-1-4-1"&gt;&lt;/a&gt;虚拟环境中安装部署nikola 及 题外:emacs的eshell中进行虚拟环境管理&lt;br&gt;&lt;ul class="org-ul"&gt;&lt;li&gt;&lt;a id="sec-1-1-4-1-1" name="sec-1-1-4-1-1"&gt;&lt;/a&gt;&lt;span class="done DONE"&gt;DONE&lt;/span&gt; virtualenv的安装使用&lt;br&gt;&lt;div class="outline-text-6" id="text-1-1-4-1-1"&gt;
+&lt;/div&gt;
+&lt;ul class="org-ul"&gt;&lt;li&gt;&lt;a id="sec-1-1-4-1-1-1" name="sec-1-1-4-1-1-1"&gt;&lt;/a&gt;eshell中使用会提示错误 环境 Python 2.7.11 :: Continuum Analytics, Inc.&lt;br&gt;&lt;div class="outline-text-7" id="text-1-1-4-1-1-1"&gt;
+&lt;p&gt;
+OSError: Command /Users/bianbin/Docum…venv/blog/bin/python - setuptools pip wheel failed with error code 1
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;ul class="org-ul"&gt;&lt;li&gt;&lt;a id="sec-1-1-4-1-1-1-1" name="sec-1-1-4-1-1-1-1"&gt;&lt;/a&gt;解决方法1[conda install -c anaconda virtualenv=15.1.0] 网络太慢 未成功&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-4-1-1-1-2" name="sec-1-1-4-1-1-1-2"&gt;&lt;/a&gt;解决方法2[降级到python 2.7.9] 网络太慢 未成功&lt;br&gt;&lt;ul class="org-ul"&gt;&lt;li&gt;&lt;a id="sec-1-1-4-1-1-1-2-1" name="sec-1-1-4-1-1-1-2-1"&gt;&lt;/a&gt;python降级方法[conda install python=2.7.9]&lt;br&gt;&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-4-1-1-2" name="sec-1-1-4-1-1-2"&gt;&lt;/a&gt;解决方法3[忽略以上,使用pycharm来生成virtualenv] 能创建,但是virtualenvwrapper安装有误&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-4-1-1-3" name="sec-1-1-4-1-1-3"&gt;&lt;/a&gt;解决方法4[删除了anaconda,使用原生python]&lt;br&gt;&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-4-1-2" name="sec-1-1-4-1-2"&gt;&lt;/a&gt;virtualenvwrapper的安装使用   &lt;span class="tag"&gt;&lt;span class="drill"&gt;drill&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;div class="outline-text-6" id="text-1-1-4-1-2"&gt;
+&lt;/div&gt;
+&lt;ul class="org-ul"&gt;&lt;li&gt;&lt;a id="sec-1-1-4-1-2-1" name="sec-1-1-4-1-2-1"&gt;&lt;/a&gt;创建一个虚拟环境&lt;br&gt;&lt;div class="outline-text-7" id="text-1-1-4-1-2-1"&gt;
+&lt;p&gt;
+[mkvirtualenv my&lt;sub&gt;project]&lt;/sub&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-4-1-2-2" name="sec-1-1-4-1-2-2"&gt;&lt;/a&gt;在虚拟环境上工作&lt;br&gt;&lt;div class="outline-text-7" id="text-1-1-4-1-2-2"&gt;
+&lt;p&gt;
+[workon my&lt;sub&gt;project]&lt;/sub&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-4-1-2-3" name="sec-1-1-4-1-2-3"&gt;&lt;/a&gt;创建项目的同时创建虚拟环境&lt;br&gt;&lt;div class="outline-text-7" id="text-1-1-4-1-2-3"&gt;
+&lt;p&gt;
+[mkproject myproject]
+项目目录为[$PROJECT&lt;sub&gt;HOME]&lt;/sub&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-4-1-2-4" name="sec-1-1-4-1-2-4"&gt;&lt;/a&gt;停止虚拟环境&lt;br&gt;&lt;div class="outline-text-7" id="text-1-1-4-1-2-4"&gt;
+&lt;p&gt;
+[deactivate]
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-4-1-2-5" name="sec-1-1-4-1-2-5"&gt;&lt;/a&gt;删除虚拟环境&lt;br&gt;&lt;div class="outline-text-7" id="text-1-1-4-1-2-5"&gt;
+&lt;p&gt;
+[rmvirtualenv my&lt;sub&gt;project]&lt;/sub&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-4-1-3" name="sec-1-1-4-1-3"&gt;&lt;/a&gt;在eshell中使用virtualenv&lt;br&gt;&lt;ul class="org-ul"&gt;&lt;li&gt;&lt;a id="sec-1-1-4-1-3-1" name="sec-1-1-4-1-3-1"&gt;&lt;/a&gt;安装virtualenv和virtualenvwrapper包,设置envs安装路径,默认为~/.virtualenvs&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-4-1-3-2" name="sec-1-1-4-1-3-2"&gt;&lt;/a&gt;使用venv-mkvirtulenv venv-workon等语句在eshell中创建切换虚拟环境&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-4-1-3-3" name="sec-1-1-4-1-3-3"&gt;&lt;/a&gt;安装eshell-prompt-extras包扩展eshell显示virtualenv信息&lt;br&gt;&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-4-2" name="sec-1-1-4-2"&gt;&lt;/a&gt;&lt;span class="done DONE"&gt;DONE&lt;/span&gt; 安装nikola&lt;br&gt;&lt;div class="outline-text-5" id="text-1-1-4-2"&gt;
+&lt;/div&gt;
+&lt;ul class="org-ul"&gt;&lt;li&gt;&lt;a id="sec-1-1-4-2-1" name="sec-1-1-4-2-1"&gt;&lt;/a&gt;在虚拟环境nikola中 pip install nikola&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-4-2-2" name="sec-1-1-4-2-2"&gt;&lt;/a&gt;安装nikola的org支持 nikola plugin -i orgmode&lt;br&gt;&lt;div class="outline-text-6" id="text-1-1-4-2-2"&gt;
+&lt;p&gt;
+目的是为了让nikola可以正常编译org格式的文件
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;ul class="org-ul"&gt;&lt;li&gt;&lt;a id="sec-1-1-4-2-2-1" name="sec-1-1-4-2-2-1"&gt;&lt;/a&gt;安装nikola的org支持 nikola plugin -i orgmode时可能出错,但如果后面步骤中可以正常编译org格式的文件,可以不管&lt;br&gt;&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-4-2-3" name="sec-1-1-4-2-3"&gt;&lt;/a&gt;emacs中安装nikola包,一样使用M-x,package-install&lt;br&gt;&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-4-3" name="sec-1-1-4-3"&gt;&lt;/a&gt;nikola的命令列表 查看用nikola –help&lt;br&gt;&lt;div class="outline-text-5" id="text-1-1-4-3"&gt;
+&lt;pre class="example"&gt;
+Available commands:
+  nikola auto                 builds and serves a site; automatically detects site changes, rebuilds, and optionally refreshes a browser
+  nikola bootswatch_theme     given a swatch name from bootswatch.com and a parent theme, creates a custom theme
+  nikola build                run tasks
+  nikola check                check links and files in the generated site
+  nikola clean                clean action / remove targets
+  nikola console              start an interactive Python console with access to your site
+  nikola deploy               deploy the site
+  nikola doit_auto            automatically execute tasks when a dependency changes
+  nikola dumpdb               dump dependency DB
+  nikola forget               clear successful run status from internal DB
+  nikola github_deploy        deploy the site to GitHub Pages
+  nikola help                 show help
+  nikola ignore               ignore task (skip) on subsequent runs
+  nikola import_wordpress     import a WordPress dump
+  nikola info                 show info about a task
+  nikola init                 create a Nikola site in the specified folder
+  nikola install_theme        install theme into current site
+  nikola list                 list tasks from dodo file
+  nikola new_page             create a new page in the site
+  nikola new_post             create a new blog post or site page
+  nikola orphans              list all orphans
+  nikola plugin               manage plugins
+  nikola reset-dep            recompute and save the state of file dependencies without executing actions
+  nikola rst2html             compile reStructuredText to HTML files
+  nikola serve                start the test webserver
+  nikola status               display site status
+  nikola strace               use strace to list file_deps and targets
+  nikola tabcompletion        generate script for tab-completion
+  nikola theme                manage themes
+  nikola version              print the Nikola version number
+
+  nikola help                 show help / reference
+  nikola help &amp;lt;command&amp;gt;       show command usage
+  nikola help &amp;lt;task-name&amp;gt;     show task usage
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-1-1-5" class="outline-4"&gt;
+&lt;h4 id="sec-1-1-5"&gt;github pages的准备&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-1-1-5"&gt;
+&lt;/div&gt;&lt;ul class="org-ul"&gt;&lt;li&gt;&lt;a id="sec-1-1-5-1" name="sec-1-1-5-1"&gt;&lt;/a&gt;&lt;span class="done DONE"&gt;DONE&lt;/span&gt; 新建一个github pages &lt;a href="https://github.com/KevinBean/writelab.github.io.git"&gt;https://github.com/KevinBean/writelab.github.io.git&lt;/a&gt;&lt;br&gt;&lt;div class="outline-text-5" id="text-1-1-5-1"&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-5-2" name="sec-1-1-5-2"&gt;&lt;/a&gt;如果有域名,可以设置域名指向&lt;br&gt;&lt;ul class="org-ul"&gt;&lt;li&gt;&lt;a id="sec-1-1-5-2-1" name="sec-1-1-5-2-1"&gt;&lt;/a&gt;CANCELLED 这里设置域名lab.writelab.cn指向writelab.github.io 不成功&lt;br&gt;&lt;div class="outline-text-6" id="text-1-1-5-2-1"&gt;
+&lt;p&gt;
+因为之前设置过用户名.github.io,而github[免费?]账号每个只能绑定一个域名
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-5-3" name="sec-1-1-5-3"&gt;&lt;/a&gt;clone writelab.github.io的资料到本地文件夹&lt;br&gt;&lt;div class="outline-text-5" id="text-1-1-5-3"&gt;
+&lt;p&gt;
+使用git命令行或github desktop
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;ul class="org-ul"&gt;&lt;li&gt;&lt;a id="sec-1-1-5-3-1" name="sec-1-1-5-3-1"&gt;&lt;/a&gt;这里采用了github建立文件夹,clone到本地的方法;还有一种方法是在本地建立文件夹,再设置push到上面建立好的远程github库&lt;br&gt;&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-5-4" name="sec-1-1-5-4"&gt;&lt;/a&gt;注意要为git库建立一个非master分支,用于存放原始的nikola站点文件,post的原格式文件(md\org\html等)&lt;br&gt;&lt;div class="outline-text-5" id="text-1-1-5-4"&gt;
+&lt;p&gt;
+因为master分支将被nikola用于部署最终生成的静态站点.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-1-1-6" class="outline-4"&gt;
+&lt;h4 id="sec-1-1-6"&gt;创建nikola站点&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-1-1-6"&gt;
+&lt;/div&gt;&lt;ul class="org-ul"&gt;&lt;li&gt;&lt;a id="sec-1-1-6-1" name="sec-1-1-6-1"&gt;&lt;/a&gt;使用命令行在此文件夹中nikola init . 设置conf.py&lt;br&gt;&lt;ul class="org-ul"&gt;&lt;li&gt;&lt;a id="sec-1-1-6-1-1" name="sec-1-1-6-1-1"&gt;&lt;/a&gt;设置时的几点信息&lt;br&gt;&lt;div class="outline-text-6" id="text-1-1-6-1-1"&gt;
+&lt;p&gt;
+BLOG&lt;sub&gt;AUTHOR&lt;/sub&gt; = "Your Name"  # (translatable)
+BLOG&lt;sub&gt;TITLE&lt;/sub&gt; = "Demo Site"  # (translatable)
+SITE&lt;sub&gt;URL&lt;/sub&gt; = "&lt;a href="http://getnikola.com/"&gt;http://getnikola.com/&lt;/a&gt;"
+BLOG&lt;sub&gt;EMAIL&lt;/sub&gt; = "joe@demo.site"
+BLOG&lt;sub&gt;DESCRIPTION&lt;/sub&gt; = "This is a demo site for Nikola."  # (translatable)
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-6-1-2" name="sec-1-1-6-1-2"&gt;&lt;/a&gt;在nikola站点的conf.py文件里增加org支持&lt;br&gt;&lt;div class="outline-text-6" id="text-1-1-6-1-2"&gt;
+&lt;p&gt;
+COMPILERS["orgmode"] = ('.org',)
+&lt;/p&gt;
+
+&lt;p&gt;
+POSTS = POSTS + (("posts/*.org", "posts", "post.tmpl"),)
+PAGES = PAGES + (("stories/*.org", "stories", "story.tmpl"),)
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-1-1-7" class="outline-4"&gt;
+&lt;h4 id="sec-1-1-7"&gt;利用nikola编写文章&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-1-1-7"&gt;
+&lt;/div&gt;&lt;ul class="org-ul"&gt;&lt;li&gt;&lt;a id="sec-1-1-7-1" name="sec-1-1-7-1"&gt;&lt;/a&gt;题外:命令行里运行nikola命令都没问题,但emacs里的M-x,nikola命令如果配置不适当,可能无法使用&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-7-2" name="sec-1-1-7-2"&gt;&lt;/a&gt;使用命令行nikola new&lt;sub&gt;post&lt;/sub&gt; 或者 emacs里M-x nikola-new-post&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a id="sec-1-1-7-3" name="sec-1-1-7-3"&gt;&lt;/a&gt;可以利用emacs插件yasnippet设置模板,方便生成文章meta信息&lt;br&gt;&lt;div class="outline-text-5" id="text-1-1-7-3"&gt;
+&lt;p&gt;
+详见文章开头提到的视频
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-1-1-8" class="outline-4"&gt;
+&lt;h4 id="sec-1-1-8"&gt;编译并预览&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-1-1-8"&gt;
+&lt;/div&gt;&lt;ul class="org-ul"&gt;&lt;li&gt;&lt;a id="sec-1-1-8-1" name="sec-1-1-8-1"&gt;&lt;/a&gt;命令行nikola build 后nikola sever –browser预览;或者用emacs中nikola包提供的命令&lt;br&gt;&lt;/li&gt;&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-1-1-9" class="outline-4"&gt;
+&lt;h4 id="sec-1-1-9"&gt;部署到github&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-1-1-9"&gt;
+&lt;/div&gt;&lt;ul class="org-ul"&gt;&lt;li&gt;&lt;a id="sec-1-1-9-1" name="sec-1-1-9-1"&gt;&lt;/a&gt;命令行nikola github&lt;sub&gt;deploy部署到github&lt;/sub&gt;,&lt;br&gt;&lt;div class="outline-text-5" id="text-1-1-9-1"&gt;
+&lt;p&gt;
+真正的一键部署,build\分支切换创建和commit都不用自己做
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-1-1-10" class="outline-4"&gt;
+&lt;h4 id="sec-1-1-10"&gt;环境配置完毕,以上为部署记录&lt;/h4&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><guid>http://git.writelab.cn/writelab.github.io/posts/github-pages-with-nikola-and-orgmode/</guid><pubDate>Sat, 15 Jul 2017 13:40:50 GMT</pubDate></item><item><title>test</title><link>http://git.writelab.cn/writelab.github.io/posts/test/</link><dc:creator>bean</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
 &lt;h2 id="sec-1"&gt;bucheng   &lt;span class="tag"&gt;&lt;span class="good"&gt;good&lt;/span&gt;&lt;/span&gt;&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
 good let me see see Write your publication here.
 &lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description><guid>http://lab.writelab.cn/posts/test/</guid><pubDate>Sat, 15 Jul 2017 11:14:00 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;</description><guid>http://git.writelab.cn/writelab.github.io/posts/test/</guid><pubDate>Sat, 15 Jul 2017 11:14:00 GMT</pubDate></item></channel></rss>

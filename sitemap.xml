@@ -6,31 +6,35 @@
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
-  <loc>http://lab.writelab.cn/</loc>
+  <loc>http://git.writelab.cn/writelab.github.io/</loc>
   <lastmod>2017-07-15T11:16:00Z</lastmod>
  </url>
  <url>
-  <loc>http://lab.writelab.cn/2017/</loc>
+  <loc>http://git.writelab.cn/writelab.github.io/2017/</loc>
   <lastmod>2017-07-15T11:16:00Z</lastmod>
  </url>
  <url>
-  <loc>http://lab.writelab.cn/archive.html</loc>
-  <lastmod>2017-07-15T12:23:00Z</lastmod>
+  <loc>http://git.writelab.cn/writelab.github.io/archive.html</loc>
+  <lastmod>2017-07-15T14:00:00Z</lastmod>
  </url>
  <url>
-  <loc>http://lab.writelab.cn/categories/</loc>
+  <loc>http://git.writelab.cn/writelab.github.io/categories/</loc>
   <lastmod>2017-07-15T11:16:00Z</lastmod>
  </url>
  <url>
-  <loc>http://lab.writelab.cn/galleries/</loc>
+  <loc>http://git.writelab.cn/writelab.github.io/galleries/</loc>
   <lastmod>2017-07-15T11:16:00Z</lastmod>
  </url>
  <url>
-  <loc>http://lab.writelab.cn/listings/</loc>
+  <loc>http://git.writelab.cn/writelab.github.io/listings/</loc>
   <lastmod>2017-07-15T11:16:00Z</lastmod>
  </url>
  <url>
-  <loc>http://lab.writelab.cn/posts/test/</loc>
+  <loc>http://git.writelab.cn/writelab.github.io/posts/github-pages-with-nikola-and-orgmode/</loc>
+  <lastmod>2017-07-15T13:58:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://git.writelab.cn/writelab.github.io/posts/test/</loc>
   <lastmod>2017-07-15T11:16:00Z</lastmod>
  </url>
 </urlset>
