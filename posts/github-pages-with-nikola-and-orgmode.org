@@ -1,0 +1,188 @@
+#+BEGIN_COMMENT
+title: 借助nikola和orgmode完成文章写作和发布流程
+  slug: github-pages-with-nikola-and-orgmode
+  date: 2017-07-15
+  tag: emacs org blog github
+  category:
+  link:
+  effort: 1:06
+  description:
+  type: text
+#+END_COMMENT
+
+* 借助nikola和orgmode完成文章写作和发布流程
+** 博客发布流程 orgmode写作->nikola管理部署->github pages呈现
+   :LOGBOOK:
+   CLOCK: [2017-07-15 Sat 20:49]
+   :END:
+*** 想法来源
+**** DONE 根据Mike Zamansky的emacs使用系列文章/视频中的[[https://www.youtube.com/watch?v=wSeTic9obKw][(2) Using Emacs 35 - blogging - YouTube]]提到的blog发布流程
+     CLOSED: [2017-07-15 Sat 20:55] SCHEDULED: <2017-07-13 Thu>
+     :LOGBOOK:
+     - State "DONE"       from "PROJECT"    [2017-07-15 Sat 20:55]
+     - State "PROJECT"    from "DONE"       [2017-07-15 Sat 20:55]
+     - State "DONE"       from "PROJECT"    [2017-07-15 Sat 20:50]
+     - State "PROJECT"    from "DONE"       [2017-07-15 Sat 20:50]
+     - State "DONE"       from "NEXT"       [2017-07-15 Sat 20:49]
+     CLOCK: [2017-07-15 Sat 17:28]--[2017-07-15 Sat 20:49] =>  3:21
+     CLOCK: [2017-07-15 Sat 00:45]--[2017-07-15 Sat 02:04] =>  1:19
+     CLOCK: [2017-07-13 Thu 21:35]--[2017-07-13 Thu 23:09] =>  1:34
+     CLOCK: [2017-07-02 Sun 02:03]--[2017-07-02 Sun 03:05] =>  1:02
+     :END:
+     区别在于,视频中的发布流程除了orgmode\nikola\github pages之外还利用了prodigy[在emacs中启动外部应用程序/命令行程序],在我的实际应用中还未实现.
+**** 上述流程实现过程中,在emacs的orgmode中做了相关记录,这篇文章由此记录整理而来.
+*** 未实现的prodigy
+**** prodigy作用为实现在emacs界面中管理外部命令行
+     prodigy的作者每天要重复进入不同的工作目录,用不同的命令做不同的操作,因此想到用emacs做一个allinone的管理界面,已节约重复性工作.
+**** DONE 在emacs里使用M-x,package-install即可顺利安装prodigy,可以在emacs里管理外部程序
+     CLOSED: [2017-07-11 Tue 02:56]
+     :LOGBOOK:
+     - State "DONE"       from "NEXT"       [2017-07-11 Tue 02:56]
+     :END:
+**** prodigy使用[prodigy-define-service]进行配置
+Services are created using prodigy-define-service:
+形式如下:
+#+BEGIN_EXAMPLE
+(prodigy-define-service
+  :name "Project X 项目名称"
+  :cwd "~/Code/project 工作目录"
+  :command "nodemon 命令名"
+  :args '("app.coffee 参数")
+  :tags '(work test 标签)
+  :port 9001 端口)
+#+END_EXAMPLE
+**** 详情请见prodigy项目页面
+https://github.com/rejeep/prodigy.el
+*** orgmode的使用
+    orgmode的使用和有点可手动搜索,此处略
+*** nikola作为文章管理及静态站点生成器
+**** 虚拟环境中安装部署nikola 及 题外:emacs的eshell中进行虚拟环境管理
+***** DONE virtualenv的安装使用
+      CLOSED: [2017-07-15 Sat 21:11]
+      :LOGBOOK:
+      - State "DONE"       from "PROJECT"    [2017-07-15 Sat 21:11]
+      - State "PROJECT"    from "DONE"       [2017-07-15 Sat 21:11]
+      - State "DONE"       from "NEXT"       [2017-07-15 Sat 00:16]
+      :END:
+****** eshell中使用会提示错误 环境 Python 2.7.11 :: Continuum Analytics, Inc.
+ OSError: Command /Users/bianbin/Docum...venv/blog/bin/python - setuptools pip wheel failed with error code 1
+******* 解决方法1[conda install -c anaconda virtualenv=15.1.0] 网络太慢 未成功
+******* 解决方法2[降级到python 2.7.9] 网络太慢 未成功
+******** python降级方法[conda install python=2.7.9]
+****** 解决方法3[忽略以上,使用pycharm来生成virtualenv] 能创建,但是virtualenvwrapper安装有误
+****** 解决方法4[删除了anaconda,使用原生python]
+***** virtualenvwrapper的安装使用                                               :drill:
+      :PROPERTIES:
+      :DRILL_CARD_TYPE: hide1cloze
+      :END:
+****** 创建一个虚拟环境
+       [mkvirtualenv my_project]
+****** 在虚拟环境上工作
+       [workon my_project]
+****** 创建项目的同时创建虚拟环境
+       [mkproject myproject]
+       项目目录为[$PROJECT_HOME]
+****** 停止虚拟环境
+       [deactivate]
+****** 删除虚拟环境
+       [rmvirtualenv my_project]
+***** 在eshell中使用virtualenv
+****** 安装virtualenv和virtualenvwrapper包,设置envs安装路径,默认为~/.virtualenvs
+****** 使用venv-mkvirtulenv venv-workon等语句在eshell中创建切换虚拟环境
+****** 安装eshell-prompt-extras包扩展eshell显示virtualenv信息
+**** DONE 安装nikola
+     CLOSED: [2017-07-15 Sat 17:29]
+     :LOGBOOK:
+     - State "DONE"       from "NEXT"       [2017-07-15 Sat 17:29]
+     :END:
+***** 在虚拟环境nikola中 pip install nikola
+***** 安装nikola的org支持 nikola plugin -i orgmode
+      目的是为了让nikola可以正常编译org格式的文件
+****** 安装nikola的org支持 nikola plugin -i orgmode时可能出错,但如果后面步骤中可以正常编译org格式的文件,可以不管
+***** emacs中安装nikola包,一样使用M-x,package-install
+**** nikola的命令列表 查看用nikola --help
+#+BEGIN_EXAMPLE
+Available commands:
+  nikola auto                 builds and serves a site; automatically detects site changes, rebuilds, and optionally refreshes a browser
+  nikola bootswatch_theme     given a swatch name from bootswatch.com and a parent theme, creates a custom theme
+  nikola build                run tasks
+  nikola check                check links and files in the generated site
+  nikola clean                clean action / remove targets
+  nikola console              start an interactive Python console with access to your site
+  nikola deploy               deploy the site
+  nikola doit_auto            automatically execute tasks when a dependency changes
+  nikola dumpdb               dump dependency DB
+  nikola forget               clear successful run status from internal DB
+  nikola github_deploy        deploy the site to GitHub Pages
+  nikola help                 show help
+  nikola ignore               ignore task (skip) on subsequent runs
+  nikola import_wordpress     import a WordPress dump
+  nikola info                 show info about a task
+  nikola init                 create a Nikola site in the specified folder
+  nikola install_theme        install theme into current site
+  nikola list                 list tasks from dodo file
+  nikola new_page             create a new page in the site
+  nikola new_post             create a new blog post or site page
+  nikola orphans              list all orphans
+  nikola plugin               manage plugins
+  nikola reset-dep            recompute and save the state of file dependencies without executing actions
+  nikola rst2html             compile reStructuredText to HTML files
+  nikola serve                start the test webserver
+  nikola status               display site status
+  nikola strace               use strace to list file_deps and targets
+  nikola tabcompletion        generate script for tab-completion
+  nikola theme                manage themes
+  nikola version              print the Nikola version number
+
+  nikola help                 show help / reference
+  nikola help <command>       show command usage
+  nikola help <task-name>     show task usage
+#+END_EXAMPLE
+*** github pages的准备
+**** DONE 新建一个github pages https://github.com/KevinBean/writelab.github.io.git
+     CLOSED: [2017-07-15 Sat 18:29]
+     :LOGBOOK:
+     - State "DONE"       from "NEXT"       [2017-07-15 Sat 18:29]
+     :END:
+**** 如果有域名,可以设置域名指向
+***** CANCELLED 这里设置域名lab.writelab.cn指向writelab.github.io 不成功
+      CLOSED: [2017-07-15 Sat 20:12]
+      :LOGBOOK:
+      - State "CANCELLED"  from "DONE"       [2017-07-15 Sat 20:44]
+      - State "DONE"       from "NEXT"       [2017-07-15 Sat 20:12]
+      :END:
+      因为之前设置过用户名.github.io,而github[免费?]账号每个只能绑定一个域名
+**** clone writelab.github.io的资料到本地文件夹
+     使用git命令行或github desktop
+***** 这里采用了github建立文件夹,clone到本地的方法;还有一种方法是在本地建立文件夹,再设置push到上面建立好的远程github库
+**** 注意要为git库建立一个非master分支,用于存放原始的nikola站点文件,post的原格式文件(md\org\html等)
+     因为master分支将被nikola用于部署最终生成的静态站点.
+*** 创建nikola站点
+**** 使用命令行在此文件夹中nikola init . 设置conf.py
+***** 设置时的几点信息
+# Data about this site
+BLOG_AUTHOR = "Your Name"  # (translatable)
+BLOG_TITLE = "Demo Site"  # (translatable)
+SITE_URL = "http://getnikola.com/"
+BLOG_EMAIL = "joe@demo.site"
+BLOG_DESCRIPTION = "This is a demo site for Nikola."  # (translatable)
+***** 在nikola站点的conf.py文件里增加org支持
+     # NOTE: Needs additional configuration in init.el file.
+
+     # Add the orgmode compiler to your COMPILERS dict.
+     COMPILERS["orgmode"] = ('.org',)
+
+     # Add org files to your POSTS, PAGES
+     POSTS = POSTS + (("posts/*.org", "posts", "post.tmpl"),)
+     PAGES = PAGES + (("stories/*.org", "stories", "story.tmpl"),)
+*** 利用nikola编写文章
+**** 题外:命令行里运行nikola命令都没问题,但emacs里的M-x,nikola命令如果配置不适当,可能无法使用
+**** 使用命令行nikola new_post 或者 emacs里M-x nikola-new-post
+**** 可以利用emacs插件yasnippet设置模板,方便生成文章meta信息
+     详见文章开头提到的视频
+*** 编译并预览
+**** 命令行nikola build 后nikola sever --browser预览;或者用emacs中nikola包提供的命令
+*** 部署到github
+**** 命令行nikola github_deploy部署到github,
+     真正的一键部署,build\分支切换创建和commit都不用自己做
+*** 环境配置完毕,以上为部署记录

@@ -21,7 +21,7 @@ BLOG_AUTHOR = "bean"  # (translatable)
 BLOG_TITLE = "writelab"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link. Don't forget the protocol (http/https)!
-SITE_URL = "http://lab.writelab.cn/"
+SITE_URL = "http://git.writelab.cn/writelab.github.io/"
 # This is the URL where Nikola's output will be deployed.
 # If not set, defaults to SITE_URL
 # BASE_URL = "http://lab.writelab.cn/"
@@ -1306,6 +1306,7 @@ UNSLUGIFY_TITLES = True
 
 # Plugins you don't want to use. Be careful :-)
 # DISABLED_PLUGINS = ["render_galleries"]
+DISABLED_PLUGINS = ["robots"]
 
 # Special settings to disable only parts of the indexes plugin (to allow RSS
 # but no blog indexes, or to allow blog indexes and Atom but no site-wide RSS).
