@@ -21,10 +21,10 @@ BLOG_AUTHOR = "bean"  # (translatable)
 BLOG_TITLE = "writelab"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link. Don't forget the protocol (http/https)!
-SITE_URL = "http://writelab.github.io/"
+SITE_URL = "http://lab.writelab.cn/"
 # This is the URL where Nikola's output will be deployed.
 # If not set, defaults to SITE_URL
-# BASE_URL = "http://writelab.github.io/"
+# BASE_URL = "http://lab.writelab.cn/"
 BLOG_EMAIL = "bianbin+writelab@gmail.com"
 BLOG_DESCRIPTION = "RUN YOU CLEVER BOY"  # (translatable)
 

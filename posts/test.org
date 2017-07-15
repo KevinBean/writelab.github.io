@@ -9,5 +9,5 @@
   type: text
 #+END_COMMENT
 
-* bucheng
+* bucheng                                                                       :good:
 good let me see see Write your publication here.
