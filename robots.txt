@@ -1,0 +1,4 @@
+Sitemap: http://writelab.github.io/sitemapindex.xml
+
+User-Agent: *
+Host: writelab.github.io
